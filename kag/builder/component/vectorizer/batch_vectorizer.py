@@ -34,6 +34,7 @@ class EmbeddingVectorPlaceholder(object):
     def replace(self):
         if self._embedding_vector is not None:
             self._properties[self._vector_field] = self._embedding_vector
+            self._properties[self._property_key] = self._property_value
 
     def __repr__(self):
         return repr(self._number)
@@ -58,8 +59,7 @@ class EmbeddingVectorManager(object):
             if not property_value:
                 return None
             if not isinstance(property_value, str):
-                message = f"property {property_key!r} must be string to generate embedding vector"
-                raise RuntimeError(message)
+                property_value = str(property_value)
             num = len(self._placeholders)
             placeholder = EmbeddingVectorPlaceholder(
                 num, properties, vector_field, property_key, property_value

@@ -136,7 +136,7 @@ class KAGExtractor(ExtractorABC):
                 if prop_value == "NAN":
                     tmp_properties.pop(prop_name)
                     continue
-                if prop_name in spg_type.properties:
+                if spg_type is not None and prop_name in spg_type.properties:
                     from knext.schema.model.property import Property
 
                     prop: Property = spg_type.properties.get(prop_name)
